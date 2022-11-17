@@ -18,12 +18,13 @@ const app = {
 addListenerToActions(){
  const addListButtonElem= document.getElementById('addListButton');
  addListButtonElem.addEventListener('click', app.showAddListModal);
- const closeModalButtonElemList= document.querySelectorAll('.close')
+ const closeModalButtonElemList= document.querySelectorAll('.close');
  for (const buttonElem of closeModalButtonElemList){
  buttonElem.addEventListener('click',app.hideModals);
 }
 
-const addListFormElem=document.querySelector('#addListModal form').addEventListener('submit',app.handleAddListForm);
+const addListFormElem=document.querySelector('#addListModal form');
+addListFormElem.addEventListener('submit',app.handleAddListForm);
 },
 
 showAddListModal(){
@@ -42,8 +43,8 @@ hideModals(){
 handleAddListForm(event){
   event.preventDefault();
   const formElem = event.target;
-  const formData= new FormData(formElem);
-  const data = Object.fromEntries(formData);
+  const formDataObject= new FormData(formElem);
+  const listName= formDataObject.get('name');
   },
 
 makeListInDOM(){
