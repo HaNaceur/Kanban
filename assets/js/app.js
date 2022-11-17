@@ -48,13 +48,12 @@ handleAddListForm(event){
   app.hideModals();
   },
 
-makeListInDOM(){
+makeListInDOM(listName){
 const template = document.getElementById('template-list');
-const templateContent = template.content;
-document.body.appendChild(templateContent);
- maListe.querySelector
-  }
-
-}
+const newListElem= document.importNode(template.content, true);
+newListElem.querySelector('h2').textContent=listName;
+const listContainer=document.querySelector('#list-container');
+listContainer.appendChild(newListElem);
+},
 
 document.addEventListener('DOMContentLoaded', app.init );
