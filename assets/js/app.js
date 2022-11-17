@@ -10,6 +10,7 @@ const app = {
     app.hideModals();
     app.handleAddListForm();
     app.makeListInDOM();
+    app.showAddCardModal();
   },
 
 
@@ -24,6 +25,10 @@ addListenerToActions(){
 }
 const addListFormElem=document.querySelector('#addListModal form');
 addListFormElem.addEventListener('submit',app.handleAddListForm);
+const addCardButtonElemList= document.querySelectorAll('.button-add-card');
+for (const buttonElem of addCardButtonElemList){
+  buttonElem.addEventListener('click',app.showAddCardModal);
+ }
 },
 
 showAddListModal(){
@@ -46,15 +51,19 @@ handleAddListForm(event){
   const listName= formDataObject.get('name');
   app.makeListInDOM(listName);
   app.hideModals();
-  },
+},
 
 makeListInDOM(listName){
 const template = document.getElementById('template-list');
 const newListElem= document.importNode(template.content, true);
 newListElem.querySelector('h2').textContent=listName;
+newListElem.querySelector('button-add-card').addEventListener('click',app.showAddCardModal)
 const listContainer=document.querySelector('#list-container');
 listContainer.appendChild(newListElem);
 },
 
+showAddCardModal(event){
+
+},
 };
-document.addEventListener('DOMContentLoaded', app.init );
+document.addEventListener('DOMContentLoaded', app.init);
