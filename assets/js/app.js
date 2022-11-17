@@ -1,8 +1,5 @@
-
-// on objet qui contient des fonctions
 const app = {
 
-  // fonction d'initialisation, lancée au chargement de la page
   init: function () {
     console.log('app.init !');
     app.addListenerToActions();
@@ -12,9 +9,6 @@ const app = {
     app.makeListInDOM();
     app.showAddCardModal();
   },
-
-
-
 
 addListenerToActions(){
  const addListButtonElem= document.getElementById('addListButton');
@@ -29,6 +23,9 @@ const addCardButtonElemList= document.querySelectorAll('.button-add-card');
 for (const buttonElem of addCardButtonElemList){
   buttonElem.addEventListener('click',app.showAddCardModal);
  }
+ const addCardFormElem=document.querySelector('#addCardModal form');
+ addCardFormElem.addEventListener('submit',app.handleAddCardForm);
+
 },
 
 showAddListModal(){
@@ -63,7 +60,34 @@ listContainer.appendChild(newListElem);
 },
 
 showAddCardModal(event){
-
+const modalElem=document.getElementById('addCardModal');
+modalElem.classList.add('is-active');
+const listElem=event.target.closest('.panel');
+const listId = listElem.dataset.listId;
+console.log('Id de la liste cliquée :' + listId);
+const hiddenInputElem = modalElem.querySelector('input[name="list_id"]');
+hiddenInputElem.value = listId;
 },
+
+handleAddCardForm(event){
+event.preventDefault();
+const formDataObject=new FormData(formElem);
+app.makeCardInDOM(formDataObject);
+app.hideModals();
+},
+
+makeCardInDOM(formDataObject){
+const templateElem=document.getElementById('template-card');
+const newCard=document.importNode(templateElem.content, true);
+const cardContent=formDataObject.get('content');
+newCard.querySelector('.card-name').textContent=cardContent;
+const parentListId=formDataObject.get('list_id');
+const theGoodListElem =document.querySelector(`[data-list-id="${parentListId}"]`);
+theGoodListElem.querySelector('.panel-block').appendChild(newCard);
+  },
+  
+
+
 };
+
 document.addEventListener('DOMContentLoaded', app.init);
