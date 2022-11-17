@@ -23,7 +23,7 @@ addListenerToActions(){
  buttonElem.addEventListener('click',app.hideModals);
 }
 
-  document.querySelector('form').addEventListener('submit',app.handleAddListForm);
+const addListFormElem=document.querySelector('#addListModal form').addEventListener('submit',app.handleAddListForm);
 },
 
 showAddListModal(){
