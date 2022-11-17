@@ -22,7 +22,6 @@ addListenerToActions(){
  for (const buttonElem of closeModalButtonElemList){
  buttonElem.addEventListener('click',app.hideModals);
 }
-
 const addListFormElem=document.querySelector('#addListModal form');
 addListFormElem.addEventListener('submit',app.handleAddListForm);
 },
@@ -45,6 +44,8 @@ handleAddListForm(event){
   const formElem = event.target;
   const formDataObject= new FormData(formElem);
   const listName= formDataObject.get('name');
+  app.makeListInDOM(listName);
+  app.hideModals();
   },
 
 makeListInDOM(){
@@ -56,5 +57,4 @@ document.body.appendChild(templateContent);
 
 }
 
-// on accroche un écouteur d'évènement sur le document : quand le chargement est terminé, on lance app.init
 document.addEventListener('DOMContentLoaded', app.init );
