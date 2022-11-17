@@ -56,4 +56,5 @@ const listContainer=document.querySelector('#list-container');
 listContainer.appendChild(newListElem);
 },
 
+};
 document.addEventListener('DOMContentLoaded', app.init );
