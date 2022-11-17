@@ -49,7 +49,7 @@ handleAddListForm(event){
   },
 
 makeListInDOM(){
-const template = document.getElementById('my-paragraph');
+const template = document.getElementById('template-list');
 const templateContent = template.content;
 document.body.appendChild(templateContent);
  maListe.querySelector
