@@ -54,6 +54,10 @@ makeListInDOM(listName){
 const template = document.getElementById('template-list');
 const newListElem= document.importNode(template.content, true);
 newListElem.querySelector('h2').textContent=listName;
+//change list id 
+const newId= 'list' + Date.now();
+newListElem.querySelector('.panel').dataset.listId= newId;
+
 newListElem.querySelector('button-add-card').addEventListener('click',app.showAddCardModal)
 const listContainer=document.querySelector('#list-container');
 listContainer.appendChild(newListElem);
@@ -86,7 +90,6 @@ const theGoodListElem =document.querySelector(`[data-list-id="${parentListId}"]`
 theGoodListElem.querySelector('.panel-block').appendChild(newCard);
   },
   
-
 
 };
 
