@@ -79,7 +79,9 @@ hiddenInputElem.value = listId;
 handleAddCardForm(event){
 event.preventDefault();
 const formDataObject=new FormData(formElem);
-app.makeCardInDOM(formDataObject);
+//to transform formDataObject to JS object which contains the form proprieties
+const data = Object.fromEntries(formDataObject);
+app.makeCardInDOM(data);
 app.hideModals();
 },
 
