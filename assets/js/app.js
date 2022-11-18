@@ -53,13 +53,13 @@ handleAddListForm(event){
   app.hideModals();
 },
 
-makeListInDOM(listName){
+makeListInDOM(listObject){
 const template = document.getElementById('template-list');
 const newListElem= document.importNode(template.content, true);
-newListElem.querySelector('h2').textContent=listName;
+newListElem.querySelector('h2').textContent=listObject.name;
 //change list id 
-const newId= 'list' + Date.now();
-newListElem.querySelector('.panel').dataset.listId= newId;
+//const newId= 'list' + Date.now();
+newListElem.querySelector('.panel').dataset.listId= listObject.name;
 
 newListElem.querySelector('button-add-card').addEventListener('click',app.showAddCardModal)
 const listContainer=document.querySelector('#list-container');
@@ -99,6 +99,11 @@ async getListsFromAPI (){
     const response = await fetch(`${app.base_url}/lists`)
     if (!response.ok) throw new Error (response);
     const lists= await response.json();
+    console.log(lists);
+
+    for (const listObject of lists){
+      app.makeListInDOM(listObject);
+    }
   } catch (error){
       alert("Impossible to retieve the lists form the API");
       console.log(error);
