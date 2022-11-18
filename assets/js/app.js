@@ -83,13 +83,23 @@ app.makeCardInDOM(formDataObject);
 app.hideModals();
 },
 
-makeCardInDOM(formDataObject){
+makeCardInDOM(cardObject){
 const templateElem=document.getElementById('template-card');
+
 const newCard=document.importNode(templateElem.content, true);
-const cardContent=formDataObject.get('content');
+
+const cardContent=cardObject.content;
+
 newCard.querySelector('.card-name').textContent=cardContent;
-const parentListId=formDataObject.get('list_id');
+//to attribute the id from the API to the cards 
+newCard.querySelector('.box').dataset.cardId=cardObject.id;
+
+newCard.querySelector('.box').style.backgroundColor = cardObject.color;
+
+const parentListId=cardObject.list_id;
+
 const theGoodListElem =document.querySelector(`[data-list-id="${parentListId}"]`);
+
 theGoodListElem.querySelector('.panel-block').appendChild(newCard);
   },
   
@@ -101,12 +111,19 @@ async getListsFromAPI (){
     const lists= await response.json();
     console.log(lists);
 
+    // for each list we call the method makeListInDOM
     for (const listObject of lists){
       app.makeListInDOM(listObject);
+
+      //for each card of each list we call the method makeCardInDom
+      for (const cardObject of listObject.cards){
+        app.makeCardInDOM(cardObject);
     }
+  }
+
   } catch (error){
       alert("Impossible to retieve the lists form the API");
-      console.log(error);
+      console.error(error);
     }
   }
 
