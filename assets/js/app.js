@@ -51,7 +51,7 @@ async handleAddListForm(event){
 
   //we call the API to send the new list
   try {
-		const response = await fetch(`${base_url}/lists`, {
+		const response = await fetch(`${app.base_url}/lists`, {
 			method: 'POST',
       body: formDataObject,
 		});
@@ -93,12 +93,26 @@ const hiddenInputElem = modalElem.querySelector('input[name="list_id"]');
 hiddenInputElem.value = listId;
 },
 
-handleAddCardForm(event){
+async handleAddCardForm(event){
 event.preventDefault();
-const formDataObject=new FormData(formElem);
-//to transform formDataObject to JS object which contains the form proprieties
-const data = Object.fromEntries(formDataObject);
-app.makeCardInDOM(data);
+const formDataObject=new FormData(event.target);
+
+  //we call the API to send the new card
+  try {
+		const response = await fetch(`${app.base_url}/cards`, {
+			method: 'POST',
+      body: formDataObject,
+		});
+
+    if (!response.ok) throw new Error(response);
+    const createdCard = await response.json();
+
+    app.makeCardInDOM(createdCard);
+
+	} catch (error) {
+      alert("Impossible to create the list")
+	}
+  
 app.hideModals();
 },
 
