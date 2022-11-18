@@ -1,5 +1,7 @@
 const app = {
 
+  base_url= "http://localhost:3000/api",
+
   init: function () {
     console.log('app.init !');
     app.addListenerToActions();
@@ -8,6 +10,7 @@ const app = {
     app.handleAddListForm();
     app.makeListInDOM();
     app.showAddCardModal();
+    app.getListsFromAPI();
   },
 
 addListenerToActions(){
@@ -90,6 +93,17 @@ const theGoodListElem =document.querySelector(`[data-list-id="${parentListId}"]`
 theGoodListElem.querySelector('.panel-block').appendChild(newCard);
   },
   
+
+async getListsFromAPI (){
+  try{
+    const response = await fetch(`${app.base_url}/lists`)
+    if (!response.ok) throw new Error (response);
+    const lists= await response.json();
+  } catch (error){
+      alert("Impossible to retieve the lists form the API");
+      console.log(error);
+    }
+  }
 
 };
 
