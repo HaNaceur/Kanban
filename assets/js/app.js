@@ -44,10 +44,27 @@ hideModals(){
 }
 },
 
-handleAddListForm(event){
+async handleAddListForm(event){
   event.preventDefault();
   const formElem = event.target;
   const formDataObject= new FormData(formElem);
+
+  //we call the API to send the new list
+  try {
+		const response = await fetch(`${base_url}/lists`, {
+			method: 'POST',
+      body: formDataObject,
+		});
+
+    if (!response.ok) throw new Error(response);
+    const createdList = await response.json();
+
+    app.makeListInDOM(createdList);
+
+	} catch (error) {
+      alert("Impossible to create the list")
+	}
+
   const listName= formDataObject.get('name');
   app.makeListInDOM(listName);
   app.hideModals();
