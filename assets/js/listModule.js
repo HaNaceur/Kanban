@@ -38,11 +38,62 @@ const listModule = {
             //change list id 
             //const newId= 'list' + Date.now();
             newListElem.querySelector('.panel').dataset.listId= listObject.name;
+
+            newListElem.querySelector('form input[name="id"]').value = listObject.id;
+
+
             
-            newListElem.querySelector('button-add-card').addEventListener('click',app.showAddCardModal)
+            newListElem.querySelector('button-add-card').addEventListener('click',cardModule.showAddCardModal)
+
+            newListElem.querySelector('h2').addEventListener('dblclick',listModule.showEditListForm)
+
+            newListElem.querySelector('.edit-list-form').addEventListener('submit',listModule.handleEditListForm)
+
             const listContainer=document.querySelector('#list-container');
             listContainer.appendChild(newListElem);
-            },     
+            },   
+
+            showEditListForm(event){
+                event.target.classList.add('is-hidden');
+                //focus on the element next to "h2"
+                const formElem= event.target.nextElementSibling;
+                formElem.classList.remove('is-hidden');
+                //other method without html dependance:
+                //const formElem = event.target.closest('.panel').querySelector('form');
+             
+                },
+            
+                async handleEditListForm(event){
+                    event.preventDefault( );
+                    const editFormElem=event.target;
+                    const formDataObject = new FormData (editFormElem);
+                    const listId= formDataObject.get('id');
+                    console.log(listId);
+
+                    //call API
+                    const h2Elem = event.target.previousElementSibling;
+
+                  try {
+            const response = await fetch(`${utilsModule.base_url}/lists/${listId}`, {
+                method: 'PATCH',
+                body: formDataObject
+            });
+
+            if (!response.ok) throw new Error(response);
+
+            // si tout s'est bien passé : modifier le titre dans le DOM
+            const json = await response.json();
+            const newTitle = json.name;
+            h2Elem.textContent = newTitle;
+
+        } catch (error) {
+            alert("Impossible d'éditer le nom de la liste");
+        }
+        editFormElem.classList.add('is-hidden');
+        h2Elem.classList.remove('is-hidden');
+
+                 
+                },
    };
 
 module.exports = listModule;

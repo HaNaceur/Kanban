@@ -53,4 +53,6 @@ async handleAddCardForm(event){
         
         theGoodListElem.querySelector('.panel-block').appendChild(newCard);
           },
+    
+    
 };

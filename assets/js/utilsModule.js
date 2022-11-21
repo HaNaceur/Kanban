@@ -8,4 +8,5 @@ hideModals(){
     modalElemList.classList.remove('is-active');
   }
   },
+
 };
