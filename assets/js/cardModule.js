@@ -42,6 +42,7 @@ async handleAddCardForm(event){
         const cardContent=cardObject.content;
         
         newCard.querySelector('.card-name').textContent=cardContent;
+        newCard.querySelector('input[name = "content"]').value = cardObject.content;
         //to attribute the id from the API to the cards 
         newCard.querySelector('.box').dataset.cardId=cardObject.id;
 
@@ -55,8 +56,6 @@ async handleAddCardForm(event){
         newCard.querySelector('.edit-card-form').addEventListener('submit', cardModule.handleEditCardForm);
 
         newCard.querySelector('.delete-card-icon').addEventListener('click', cardModule.deleteCard);
-
-        editIcon.addEventListener('click',cardModule.showEditCardForm)
 
         
         const parentListId=cardObject.list_id;

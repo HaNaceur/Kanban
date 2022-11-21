@@ -35,6 +35,8 @@ const listModule = {
             const template = document.getElementById('template-list');
             const newListElem= document.importNode(template.content, true);
             newListElem.querySelector('h2').textContent=listObject.name;
+
+            newListElem.querySelector('input[name="name"]').value = listObject.name; newListElem.quer
             //change list id 
             //const newId= 'list' + Date.now();
             newListElem.querySelector('.panel').dataset.listId= listObject.name;
@@ -43,11 +45,13 @@ const listModule = {
 
 
             
-            newListElem.querySelector('button-add-card').addEventListener('click',cardModule.showAddCardModal)
+            newListElem.querySelector('button-add-card').addEventListener('click',cardModule.showAddCardModal);
 
-            newListElem.querySelector('h2').addEventListener('dblclick',listModule.showEditListForm)
+            newListElem.querySelector('h2').addEventListener('dblclick',listModule.showEditListForm);
 
-            newListElem.querySelector('.edit-list-form').addEventListener('submit',listModule.handleEditListForm)
+            newListElem.querySelector('.edit-list-form').addEventListener('submit',listModule.handleEditListForm);
+
+            newListElem.querySelector('button-delete-list').addEventListener('click',listModule.deleteList);
 
             const listContainer=document.querySelector('#list-container');
             listContainer.appendChild(newListElem);
@@ -94,6 +98,35 @@ const listModule = {
 
                  
                 },
+        
+        
+    async deleteList(event) {
+        // on récupère la liste dans le DOM
+        const listElem = event.target.closest('.panel'); // on cible la liste parente de l'icone poubelle qui est cliquée
+        // j'accède à l'id de la carte à supprimer grâce àà l'éttribut data-card-id dans le HTML
+        // rppel : quandon a un data-un-truc dans le HTML, on peut y accéder en JS en faisant .dataset.unTruc (passé en camelCase)
+        const cardId = listElem.dataset.cardId;
+
+        const deleteConfirmed = confirm('Are you sure you went to supress this list?');
+
+        if (!deleteConfirmed) return;
+        
+            try {
+                const response = await fetch(`${utilsModule.base_url}/lists/${cardId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) throw new Error(response);
+
+                // si on arrive ici c'est que tout s'est bien passé : la carte a été suprimée côté API, donc ola supprime aussi dans le DOM
+                listElem.remove();
+
+            } catch (error) {
+                alert("Impossible to supress the list");
+                console.error(error);
+            }
+        
+    }       
    };
 
 module.exports = listModule;

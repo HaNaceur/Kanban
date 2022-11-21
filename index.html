@@ -26,10 +26,15 @@
             </div>
 
             <div class="columns">
-
                 <div class="column is-full">
                     <div class="card-lists columns" id="list-container">
-                      
+                        <!-- ici seront insérées des lists -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- MES MODALES -->
     <!-- modale pour ajouter une liste -->
     <div class="modal" id="addListModal">
@@ -73,6 +78,12 @@
                             <input type="hidden" name="list_id">
                         </div>
                     </div>
+                    <div class="field">
+                        <label class="label">Couleur</label>
+                        <div class="control">
+                            <input type="color" class="input" name="color" value="">
+                        </div>
+                    </div>
                 </section>
                 <footer class="modal-card-foot">
                     <button class="button is-success">Save changes</button>
@@ -86,18 +97,18 @@
     <!-- template de liste -->
     <template id="template-list">
         <!-- list -->
-        <div class="column is-one-quarter panel" data-list-id="A">
+        <div class="column is-one-quarter panel" data-list-id="Z">
             <div class="panel-heading has-background-info">
                 <div class="columns">
 
                     <div class="column">
                         <h2 class="has-text-white">Nom de la liste</h2>
 
-                        <form action="" method="POST" class="is-hidden">
+                        <form action="" method="POST" class="is-hidden edit-list-form">
                             <input type="hidden" name="id" value="1">
                             <div class="field has-addons">
                                 <div class="control">
-                                    <input type="text" class="input is-small" name="list-name" value=""
+                                    <input type="text" class="input is-small" name="name" value=""
                                         placeholder="Nom de la liste">
                                 </div>
                                 <div class="control">
@@ -108,9 +119,14 @@
                     </div>
 
                     <div class="column is-narrow">
-                        <a href="#" class="is-pulled-right button-add-card">
+                        <a class="button-add-card">
                             <span class="icon is-small has-text-white">
                                 <i class="fas fa-plus"></i>
+                            </span>
+                        </a>
+                        <a class="button-delete-list">
+                            <span class="icon is-small has-text-white">
+                                <i class="fas fa-trash-alt"></i>
                             </span>
                         </a>
                     </div>
@@ -131,13 +147,27 @@
                 <div class="column card-name">
                     Contenu de la carte
                 </div>
+                <!-- formulaire d'édition -->
+                <form action="" method="POST" class="is-hidden edit-card-form">
+                    <input type="hidden" name="id" value="">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input type="text" class="input is-small" name="content" value=""
+                                placeholder="Contenu de la carte">
+                        </div>
+                        <div class="control">
+                            <button class="button is-small is-success">Valider</button>
+                        </div>
+                    </div>
+                </form>
+
                 <div class="column is-narrow">
-                    <a href="#">
+                    <a class="edit-card-icon">
                         <span class="icon is-small has-text-primary">
                             <i class="fas fa-pencil-alt"></i>
                         </span>
                     </a>
-                    <a href="#">
+                    <a class="delete-card-icon">
                         <span class="icon is-small has-text-danger">
                             <i class="fas fa-trash-alt"></i>
                         </span>
@@ -149,9 +179,9 @@
     </template>
 
     <!-- Chargement de mon fichier JS -->
-    <script src="./assets/js/listModule.js"></script>
     <script src="./assets/js/utilsModule.js"></script>
     <script src="./assets/js/cardModule.js"></script>
+    <script src="./assets/js/listModule.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
 
