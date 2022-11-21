@@ -43,6 +43,8 @@ async handleAddCardForm(event){
         
         newCard.querySelector('.card-name').textContent=cardContent;
         newCard.querySelector('input[name = "content"]').value = cardObject.content;
+
+        newCard.querySelector('input[name="color"]').value = cardObject.color;
         //to attribute the id from the API to the cards 
         newCard.querySelector('.box').dataset.cardId=cardObject.id;
 
@@ -93,6 +95,8 @@ async handleAddCardForm(event){
 
             const json = await response.json();
             cardContent.textContent = json.content;
+
+            newCard.querySelector('.box').style.backgroundColor = json.color;
 
         } catch (error) {
             alert("Impossible to edit the card content");

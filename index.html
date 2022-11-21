@@ -81,7 +81,7 @@
                     <div class="field">
                         <label class="label">Couleur</label>
                         <div class="control">
-                            <input type="color" class="input" name="color" value="">
+                            <input type="color" class="input" name="color" value="#fff">
                         </div>
                     </div>
                 </section>
@@ -150,10 +150,13 @@
                 <!-- formulaire d'édition -->
                 <form action="" method="POST" class="is-hidden edit-card-form">
                     <input type="hidden" name="id" value="">
-                    <div class="field has-addons">
+                    <div class="field">
                         <div class="control">
                             <input type="text" class="input is-small" name="content" value=""
                                 placeholder="Contenu de la carte">
+                        </div>
+                        <div class="control">
+                            <input type="color" class="input is-small" name="color" value="#fff">
                         </div>
                         <div class="control">
                             <button class="button is-small is-success">Valider</button>
