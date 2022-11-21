@@ -44,8 +44,20 @@ async handleAddCardForm(event){
         newCard.querySelector('.card-name').textContent=cardContent;
         //to attribute the id from the API to the cards 
         newCard.querySelector('.box').dataset.cardId=cardObject.id;
+
+        //to attribut this id to the hiden part
+        newCard.querySelector('form input [name="id"]').value = cardObject.id;
         
         newCard.querySelector('.box').style.backgroundColor = cardObject.color;
+
+        newCard.querySelector('.edit-card-icon').addEventListener('click', cardModule.showEditCardForm);
+        // submit of form edition
+        newCard.querySelector('.edit-card-form').addEventListener('submit', cardModule.handleEditCardForm);
+
+        newCard.querySelector('.delete-card-icon').addEventListener('click', cardModule.deleteCard);
+
+        editIcon.addEventListener('click',cardModule.showEditCardForm)
+
         
         const parentListId=cardObject.list_id;
         
@@ -54,5 +66,48 @@ async handleAddCardForm(event){
         theGoodListElem.querySelector('.panel-block').appendChild(newCard);
           },
     
+     showEditCardForm(event) {
+            const cardElem = event.target.closest('.box');
+            cardElem.querySelector('.card-name').classList.add('is-hidden');
+           cardElem.querySelector('.edit-card-form').classList.remove('is-hidden');
+        },
     
+   async handleEditCardForm(event) {
+        event.preventDefault();
+
+        const editFormElem = event.target;
+        const formDataObject = new FormData(editFormElem);
+
+        const cardId = formDataObject.get('id');
+
+        const cardContent = editFormElem.previousElementSibling;
+
+        try {
+            const response = await fetch(`${utilsModule.base_url}/cards/${cardId}`, {
+                method: 'PATCH',
+                body: formDataObject
+            });
+
+            console.log(response);
+
+            if (!response.ok) throw new Error(response);
+
+            const json = await response.json();
+            cardContent.textContent = json.content;
+
+        } catch (error) {
+            alert("Impossible to edit the card content");
+            console.error(error);
+        }
+
+        //in every case hide the form
+        editFormElem.classList.add('is-hidden');
+        cardContent.classList.remove('is-hidden');
+    },
+
+    async deleteCard(event){
+        const cardElem = event.target.closest('.box');
+        cardElem.querySelector('.card-name').classList.add('is-hidden');
+       cardElem.querySelector('.edit-card-form').classList.remove('is-hidden');
+    },
 };
