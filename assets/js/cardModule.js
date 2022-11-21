@@ -107,7 +107,22 @@ async handleAddCardForm(event){
 
     async deleteCard(event){
         const cardElem = event.target.closest('.box');
-        cardElem.querySelector('.card-name').classList.add('is-hidden');
-       cardElem.querySelector('.edit-card-form').classList.remove('is-hidden');
+        const cardId = cardElem.dataset.cardId;
+        const deleteConfirmed=confirm('Are you sure you went to supress this card ?')
+        try {
+            const response = await fetch(`${utilsModule.base_url}/cards/${cardId}`, {
+                method: 'DELETE'
+            });
+
+            console.log(response);
+
+            if (!response.ok) throw new Error(response);
+
+            cardElem.remove();
+
+        } catch (error) {
+            alert("Impossible to supress the card");
+            console.error(error);
+        }
     },
 };
