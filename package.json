@@ -1,0 +1,25 @@
+{
+  "name": "s07e01-atelier-okanban-front-flore-oclock",
+  "version": "1.0.0",
+  "description": "On termine les fonctionnalités de notre oKanban !",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx browserify -e src/app.js -o assets/js/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Kelvin/S07E01-atelier-oKanban-front-Flore-Oclock.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Kelvin/S07E01-atelier-oKanban-front-Flore-Oclock/issues"
+  },
+  "homepage": "https://github.com/O-clock-Kelvin/S07E01-atelier-oKanban-front-Flore-Oclock#readme",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "tinyify": "^4.0.0"
+  }
+}

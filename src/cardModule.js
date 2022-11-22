@@ -1,3 +1,8 @@
+const tagModule = require("./tagModule");
+const utilsModule = require("./utilsModule");
+
+
+
 const cardModule = {
     showAddCardModal(event){
         const modalElem=document.getElementById('addCardModal');
@@ -58,6 +63,8 @@ async handleAddCardForm(event){
         newCard.querySelector('.edit-card-form').addEventListener('submit', cardModule.handleEditCardForm);
 
         newCard.querySelector('.delete-card-icon').addEventListener('click', cardModule.deleteCard);
+
+        newCard.querySelector('.associate-tag-icon').addEventListener('click', tagModule.showAssociateTagToCardModale);
 
         
         const parentListId=cardObject.list_id;
@@ -169,3 +176,5 @@ async handleAddCardForm(event){
         })
     }
 };
+
+module.exports = cardModule;

@@ -1,3 +1,6 @@
+const cardModule = require("./cardModule");
+const utilsModule = require("./utilsModule");
+
 const listModule = {
 
     showAddListModal(){

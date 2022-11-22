@@ -1,3 +1,5 @@
+const utilsModule = require("./utilsModule");
+
 const tagModule = {
 
     makeTagInDom(tag){

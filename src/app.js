@@ -1,4 +1,7 @@
 const listModule = require("./listModule");
+const cardModule = require("./cardModule");
+const tagModule = require("./tagModule");
+const utilsModule = require("./utilsModule");
 
 const app = {
 
@@ -7,11 +10,6 @@ const app = {
   init: function () {
     console.log('app.init !');
     app.addListenerToActions();
-    app.showAddListModal();
-    app.hideModals();
-    app.handleAddListForm();
-    app.makeListInDOM();
-    app.showAddCardModal();
     app.getDataFromAPI();
   },
 
