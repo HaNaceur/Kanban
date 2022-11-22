@@ -13,6 +13,41 @@ const tagModule = {
         parentCardElem.appendChild(tagElem);
         },
     
+    async showAssociateTagToCardModale(event){
+        const modalElem = document.querySelector('#addTagToCardModal');
+     
+        modalElem.classList.add('is-active');
+
+        const selectElem = modalElem.querySelector('select');
+
+
+
+        try {
+            const response = await fetch(`${utilsModule.base_url}/tags`);
+
+            if (!response.ok) throw new Error(response);
+
+            const tagList = await response.json();
+            console.log(tagList);
+
+            for (const tag of tagList) {
+
+                const optionElem = document.createElement('option');
+
+                optionElem.textContent = tag.name;
+
+                optionElem.value = tag.id;
+
+                selectElem.appendChild(optionElem);
+                
+            }
+
+        } catch (error) {
+            alert("Impossible to retrieve the list of tags");
+            console.error(error);
+        }
+    },
+    
    };
 
 module.exports = tagModule;

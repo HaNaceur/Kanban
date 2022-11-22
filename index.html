@@ -82,8 +82,35 @@
                     <div class="field">
                         <label class="label">Couleur</label>
                         <div class="control">
-                            <input type="color" class="input" name="color" value="#fff">
+                            <input type="color" class="input" name="color" value="#ffffff">
                         </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success">Save changes</button>
+                    <button class="button close" type="button">Cancel</button>
+                </footer>
+            </form>
+        </div>
+    </div>
+
+    <!-- modale pour associer un tag à une carte -->
+    <div class="modal" id="addTagToCardModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <form action="" method="POST">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Ajouter un tag à la carte</p>
+                    <button class="delete close" type="button" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="field">
+                        <div class="select">
+                            <select name="tag_id" >
+                                <option value="test">Un nom de tag</option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="list_id">
                     </div>
                 </section>
                 <footer class="modal-card-foot">
@@ -143,7 +170,7 @@
     <!-- template de carte -->
     <template id="template-card">
         <!-- card -->
-        <div class="box " data-card-id="M" id="drag-and-drop">
+        <div class="box" data-card-id="M">
             <div class="columns">
                 <div class="column card-name">
                     Contenu de la carte
@@ -166,6 +193,11 @@
                 </form>
 
                 <div class="column is-narrow">
+                    <a class="associate-tag-icon">
+                        <span class="icon is-small has-text-info">
+                            <i class="fas fa-tags"></i>
+                        </span>
+                    </a>
                     <a class="edit-card-icon">
                         <span class="icon is-small has-text-primary">
                             <i class="fas fa-pencil-alt"></i>
@@ -186,8 +218,8 @@
     <script src="./assets/js/utilsModule.js"></script>
     <script src="./assets/js/cardModule.js"></script>
     <script src="./assets/js/listModule.js"></script>
+    <script src="./assets/js/tagModule.js"></script>
     <script src="./assets/js/app.js"></script>
-   
 </body>
 
 </html>
