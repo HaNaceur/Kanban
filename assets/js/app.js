@@ -48,8 +48,12 @@ async getDataFromAPI (){
       //for each card of each list we call the method makeCardInDom
       for (const cardObject of listObject.cards){
         app.makeCardInDOM(cardObject);
+
+        for (const tag of cardObject.tags){
+          tagModule.makeTageInDom(tag)
+        }
     }
-  }
+  };
 
   //Drag and drop
 
