@@ -31,6 +31,9 @@ for (const buttonElem of addCardButtonElemList){
  const addCardFormElem=document.querySelector('#addCardModal form');
  addCardFormElem.addEventListener('submit',cardModule.handleAddCardForm);
 
+ const associateTagForm = document.querySelector('#addTagToCardModal form')
+ associateTagForm.addEventListener('submit', tagModule.associateTagToCard);
+
 },
 
 
