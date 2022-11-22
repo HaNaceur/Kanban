@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </head>
 
 <body>
@@ -142,7 +143,7 @@
     <!-- template de carte -->
     <template id="template-card">
         <!-- card -->
-        <div class="box" data-card-id="M">
+        <div class="box " data-card-id="M" id="drag-and-drop">
             <div class="columns">
                 <div class="column card-name">
                     Contenu de la carte
@@ -186,6 +187,7 @@
     <script src="./assets/js/cardModule.js"></script>
     <script src="./assets/js/listModule.js"></script>
     <script src="./assets/js/app.js"></script>
+   
 </body>
 
 </html>

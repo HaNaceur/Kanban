@@ -112,7 +112,7 @@ const listModule = {
         if (!deleteConfirmed) return;
         
             try {
-                const response = await fetch(`${utilsModule.base_url}/lists/${cardId}`, {
+                const response = await fetch(`${utilsModule.base_url}/lists/${listId}`, {
                     method: 'DELETE'
                 });
 
@@ -126,7 +126,33 @@ const listModule = {
                 console.error(error);
             }
         
-    }       
+    },
+    
+    async handleDragList(event){
+        const allListsInDom = document.querySelectorAll('.panel');
+
+        allListsInDom.forEach(async(listElem, listIndex)=>{
+            const listId = listElem.dataset.listId;
+            const formDataObject = new FormData();
+            formDataObject;Set('position',listIndex);
+            try {
+                const response = await fetch(`${utilsModule.base_url}/lists/${listId}`, {
+                    method: 'PATCH',
+                    body: formDataObject
+                });
+
+                if (!response.ok) throw new Error(response);
+
+
+            } catch (error) {
+                alert("Impossible to move the list");
+                console.error(error);
+            }
+
+
+         })
+
+        },
    };
 
 module.exports = listModule;

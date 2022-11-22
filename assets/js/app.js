@@ -51,6 +51,15 @@ async getDataFromAPI (){
     }
   }
 
+  //Drag and drop
+
+  const listContainerElem = document.querySelector('#list-container');
+  Sortable.create(listContainerElem, {
+    //to call the API when the click end
+   onEnd : listModule.handleDragList
+    
+});
+
   } catch (error){
       alert("Impossible to retieve the lists form the API");
       console.error(error);
