@@ -128,4 +128,34 @@ async handleAddCardForm(event){
             console.error(error);
         }
     },
+
+    handleDragCard(event) {
+        const originListElem = event.target;
+        let allCardsFromOriginList = originListElem.querySelectorAll('.box');
+        cardModule.updateAllCardsFromOneList(allCardsFromOriginList);
+    
+    },
+
+     updateAllCardsFromOneList(event) {
+        cards.forEach(async(cardElem, cardIndex) =>{ 
+            const formDataObject = new FormData ();
+            formDataObject.set('position', cardIndex);
+
+    const cardId = cardElem.dataset.cardId;
+
+            // on apelle l'API pour mettre à jour les cartes
+            try {
+                const response = await fetch(`${utilsModule.base_url}/cards/${cardId}`, {
+                    method: 'PATCH',
+                    body: formDataObject
+                });
+
+                if (!response.ok) throw new Error(response);
+
+            } catch (error) {
+                alert("Impossible to move the card.");
+                console.error(error);
+            }
+        })
+    }
 };

@@ -51,7 +51,15 @@ const listModule = {
 
             newListElem.querySelector('.edit-list-form').addEventListener('submit',listModule.handleEditListForm);
 
+            //trash icon
+
             newListElem.querySelector('button-delete-list').addEventListener('click',listModule.deleteList);
+
+            //card drag and drop 
+            const cardContainer = newListElem.querySelector('.panel-block');
+            Sortable.create(cardContainer, {
+                onEnd: cardModule.handlDragCard
+            });
 
             const listContainer=document.querySelector('#list-container');
             listContainer.appendChild(newListElem);
@@ -153,6 +161,8 @@ const listModule = {
          })
 
         },
+
+
    };
 
 module.exports = listModule;

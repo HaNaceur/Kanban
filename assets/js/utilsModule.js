@@ -9,9 +9,4 @@ hideModals(){
   }
   },
 
-dragAndDrop(){
-    const dragAndDropElem = document.getElementById('drag-and-drop');
-    const sortable = Sortable.create(dragAndDropElem);
-  },
-
 };
