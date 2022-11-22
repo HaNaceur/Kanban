@@ -56,8 +56,10 @@ const listModule = {
             newListElem.querySelector('button-delete-list').addEventListener('click',listModule.deleteList);
 
             //card drag and drop 
+
             const cardContainer = newListElem.querySelector('.panel-block');
             Sortable.create(cardContainer, {
+                group: "list",
                 onEnd: cardModule.handlDragCard
             });
 

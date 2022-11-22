@@ -133,6 +133,14 @@ async handleAddCardForm(event){
         const originListElem = event.target;
         let allCardsFromOriginList = originListElem.querySelectorAll('.box');
         cardModule.updateAllCardsFromOneList(allCardsFromOriginList);
+
+        //to test if the list of departure is the same than the arrival list
+        if(event.form === event.to) return;
+        //if not
+        const targetList = event.to;
+        let allCardsFromTargetList = targetList.querySelectorAll('.box');
+        const targetListId = targetList.closest('panel').dataset.listId;
+        cardModule.updateAllCardsFromOneList(allCardsFromTargetList);
     
     },
 
@@ -141,7 +149,9 @@ async handleAddCardForm(event){
             const formDataObject = new FormData ();
             formDataObject.set('position', cardIndex);
 
-    const cardId = cardElem.dataset.cardId;
+            if(listId) formDataObject.set('list_id',listId);
+
+        const cardId = cardElem.dataset.cardId;
 
             // on apelle l'API pour mettre à jour les cartes
             try {
