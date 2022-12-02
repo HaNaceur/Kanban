@@ -5,8 +5,6 @@ const utilsModule = require("./utilsModule");
 
 const app = {
 
-  base_url : "http://localhost:3000/api",
-
   init: function () {
     console.log('app.init !');
     app.addListenerToActions();
